@@ -55,12 +55,10 @@ namespace LoadBalancer.Controllers
             request.AddParameter("keyWord", keyWord);
             request.AddParameter("distance", distance.ToString());
 
-            Entity entity = new Entity
+            foreach (string text in Summaries)
             {
-                Words = Summaries
-            };
-
-            request.AddJsonBody(entity);
+                request.AddParameter("words", text);
+            }
 
             var response = await c.ExecuteAsync<Entity>(request);
             return response.Data;
